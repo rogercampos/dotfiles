@@ -117,9 +117,9 @@ set expandtab
 set hidden
 set listchars=tab:▸\ ,eol:¬
 "set spelllang=en_gb
-" Put swap files in /tmp file
-set backupdir=~/tmp
-set directory=~/tmp
+" Put swap files in /.vim-tmp file
+set backupdir=~/.vim-tmp
+set directory=~/.vim-tmp
 if has("autocmd")
   autocmd FileType html,css,scss,ruby setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab

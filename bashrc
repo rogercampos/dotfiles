@@ -29,10 +29,5 @@ alias t='rake spec'
 alias ta='autotest -rails'
 alias m='rake db:migrate'
 
-# SVN aliases
-alias svnadd="svn st | grep '^\?' | awk '{print $2}' | xargs svn add"
-alias svnrmd="svn st | grep '^\!' | awk '{print $2}' | xargs svn rm"
-
-
 # Reload .bashrc
 alias refresh='. ~/.bashrc'
