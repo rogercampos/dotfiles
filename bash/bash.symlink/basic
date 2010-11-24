@@ -1,92 +1,104 @@
-# the basics
-: ${HOME=~}
-: ${LOGNAME=$(id -un)}
-: ${UNAME=$(uname)}
+# Default Ubuntu 10.10 .bashrc script
+#
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
-# complete hostnames from this file
-: ${HOSTFILE=~/.ssh/known_hosts}
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
 
-# readline config
-: ${INPUTRC=~/.inputrc}
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
 
-# ----------------------------------------------------------------------
-#  SHELL OPTIONS
-# ----------------------------------------------------------------------
+# append to the history file, don't overwrite it
+shopt -s histappend
 
-# bring in system bashrc
-test -r /etc/bashrc &&
-      . /etc/bashrc
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
 
-# shell opts. see bash(1) for details
-shopt -s cdspell >/dev/null 2>&1
-shopt -s extglob >/dev/null 2>&1
-shopt -s histappend >/dev/null 2>&1
-shopt -s hostcomplete >/dev/null 2>&1
-shopt -s interactive_comments >/dev/null 2>&1
-shopt -u mailwarn >/dev/null 2>&1
-shopt -s no_empty_cmd_completion >/dev/null 2>&1
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-# fuck that you have new mail shit
-unset MAILCHECK
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# disable core dumps
-ulimit -S -c 0
-
-# default umask
-umask 0022
-
-# to stop Finder writing .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-
-# ----------------------------------------------------------------------
-# ENVIRONMENT CONFIGURATION
-# ----------------------------------------------------------------------
-
-# detect interactive shell
-case "$-" in
-    *i*) INTERACTIVE=yes ;;
-    *)   unset INTERACTIVE ;;
-esac
-
-# detect login shell
-case "$0" in
-    -*) LOGIN=yes ;;
-    *)  unset LOGIN ;;
-esac
-
-# enable en_US locale w/ utf-8 encodings if not already configured
-: ${LANG:="es_ES.UTF-8"}
-: ${LANGUAGE:="es"}
-: ${LC_CTYPE:="es_ES.UTF-8"}
-: ${LC_ALL:="es_ES.UTF-8"}
-export LANG LANGUAGE LC_CTYPE LC_ALL
-
-# ignore backups, CVS directories, python bytecode, vim swap files
-FIGNORE="~:CVS:#:.pyc:.swp:.swa:apache-solr-*"
-HISTCONTROL=ignoreboth
-export HISTSIZE=10000
-
-# ----------------------------------------------------------------------
-# PAGER / EDITOR
-# ----------------------------------------------------------------------
-
-# See what we have to work with ...
-HAVE_VIM=$(command -v vim)
-HAVE_GVIM=$(command -v gvim)
-
-# EDITOR
-test -n "$HAVE_VIM" && EDITOR=vim || EDITOR=vi
-export EDITOR
-
-# PAGER
-if test -n "$(command -v less)" ; then
-    PAGER="less -FirSwX"
-    MANPAGER="less -FiRswX"
-else
-    PAGER=more
-    MANPAGER="$PAGER"
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
 fi
-export PAGER MANPAGER
 
-# Ack
-ACK_PAGER="$PAGER"
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
