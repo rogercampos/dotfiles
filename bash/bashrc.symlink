@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Copied from mrsimo!
+# https://github.com/mrsimo/dotfiles
+#
+
+source ~/.bash/basic
+source ~/.bash/completions
+source ~/.bash/paths
+source ~/.bash/prompt
+
+
+if [ -f ~/.localrc ]; then
+  . ~/.localrc
+fi
+
