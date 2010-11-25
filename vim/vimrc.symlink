@@ -282,10 +282,10 @@ function! SetCursorPosition()
     end
 endfunction
 
+
 " -------------------
 " AUTO & OTHERS
 " -------------------
-
 " Project Tree
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
@@ -320,4 +320,11 @@ autocmd BufNewFile,BufRead *.thor setf ruby
 if filereadable(".vimrclocal")
   source .vimrclocal
 endif
+
+" -------------------
+" Roger Campos Additions
+" Mainly from ryanb vimrc https://github.com/ryanb/dotfiles/blob/master/vimrc
+" -------------------
+command! Rroutes :e config/routes.rb
+command! Rschema :e db/schema.rb
 
