@@ -2,7 +2,7 @@
 #
 # Copied from mrsimo!
 # https://github.com/mrsimo/dotfiles
-#
+
 export BASHDIR=~/dotfiles
 
 for file in `ls $BASHDIR/**/*.bash` ; do
@@ -13,6 +13,7 @@ source ~/.bash/basic
 source ~/.bash/completions
 source ~/.bash/paths
 source ~/.bash/prompt
+source ~/.bash/aliases
 
 
 if [ -f ~/.localrc ]; then

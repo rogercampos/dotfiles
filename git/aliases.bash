@@ -1,9 +1,7 @@
-alias gpull='git pull --rebase --prune'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-alias pull="git pull origin"
-alias push="git push origin"
 alias glc="git log --graph --color --date=relative --stat"
-alias gp='git push origin HEAD'
+alias gph='git push'
+alias gpl='git pull'
 alias gd='git diff'
 alias gc='git commit'
 alias gca='git commit -a'
