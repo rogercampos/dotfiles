@@ -65,8 +65,5 @@ export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
 # MOTD / FORTUNE
 # -------------------------------------------------------------------
 
-test -n "$INTERACTIVE" -a -n "$LOGIN" && {
-    uptime
-    fortune | cowsay
-    echo ""
-}
+uptime
+fortune | cowsay
