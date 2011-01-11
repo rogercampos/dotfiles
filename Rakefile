@@ -3,6 +3,12 @@ require 'fileutils'
 desc "Install everything into the system"
 task :install => [:symlinks, :executables]
 
+
+desc "Setup environment"
+task :setup do
+  `mkdir -p ~/.vim-tmp`
+end
+
 desc "Only symlink files"
 task :symlinks do
   linkables = Dir.glob('*/**{.symlink}')
