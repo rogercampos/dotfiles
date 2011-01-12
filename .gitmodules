@@ -58,3 +58,6 @@
 [submodule "vim/vim.symlink/bundle/neocomplcache"]
 	path = vim/vim.symlink/bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
+[submodule "vim/vim.symlink/bundle/rvm.vim"]
+	path = vim/vim.symlink/bundle/rvm.vim
+	url = git://github.com/csexton/rvm.vim.git
