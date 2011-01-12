@@ -251,3 +251,6 @@ autocmd VimEnter *
   \ endif
 
 let g:NERDTreeHijackNetrw = 0
+
+"improve autocomplete menu color
+highlight Pmenu ctermbg=238 gui=bold
