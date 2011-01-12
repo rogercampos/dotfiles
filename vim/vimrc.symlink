@@ -96,7 +96,7 @@ else
 
 endif " has("autocmd")
 
-"set hls
+set hls
 
 
 " remap <LEADER> to ',' (instead of '\')
@@ -226,22 +226,22 @@ endif
 " -------------------
 " Roger Campos Additions
 " Mainly from ryanb vimrc https://github.com/ryanb/dotfiles/blob/master/vimrc
+" Also from gary bernhardt at https://github.com/garybernhardt/dotfiles
 " -------------------
 command! Rroutes :e config/routes.rb
 command! Rschema :e db/schema.rb
 
 " Make shift-tab work
-"exe 'set t_kB=' . nr2char(27) . '[Z'
+exe 'set t_kB=' . nr2char(27) . '[Z'
 
-
-" From gary bernhardt at https://github.com/garybernhardt/dotfiles
 
 " GRB: Put useful info in status line
-set statusline=%<%f%=\ [%1*%M%*%n%R%H]\ %-19(%3l,%02c%03V%)%O'%02b'
+let g:rails_statusline = 0
+set statusline=%f%m%r%h\ [%L]\ [%{&ff}]\ %{fugitive#statusline()}\ %{rvm#statusline()}\ %y%=[%p%%]\ [line:%03l,col:%02v]
 hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " GRB: clear the search buffer when hitting return
-"nnoremap <CR> :nohlsearch<CR>/<BS>
+nnoremap <CR> :nohlsearch<CR>/<BS>
 
 " Remap the tab key to do autocompletion or indentation depending on the
 " context (from http://www.vim.org/tips/tip.php?tip_id=102)
@@ -254,7 +254,8 @@ function! InsertTabWrapper()
     endif
 endfunction
 
-inoremap <tab> <c-p>
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
 
 set cursorline
 
@@ -263,6 +264,9 @@ set guioptions-=L
 set guioptions-=r
 
 " Project Tree
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+autocmd VimEnter *
+  \ if &filetype == "ruby" |
+  \   NERDTree |
+  \   wincmd p |
+  \ endif
 
