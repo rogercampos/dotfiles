@@ -254,3 +254,13 @@ let g:NERDTreeHijackNetrw = 0
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
+
+set winminheight=0
+
+map - 5<C-W>-
+map + 5<C-W>+
+
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-H> <C-W>h
+map <C-L> <C-W>l
