@@ -24,11 +24,6 @@ else
     colorscheme default
 endif
 
-
-set backupdir=~/.vim-tmp,~/.tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,/tmp
-
-
 set nobackup
 set noswapfile
 
@@ -158,10 +153,6 @@ nnoremap <C-B> :BufExplorer<cr>
 "map to fuzzy finder text mate stylez
 nnoremap <c-f> :CommandTFlush<CR>:CommandT<CR>
 
-"comment lines as with textmate
-nmap <D-D> :TComment<cr>
-vmap <D-D> :TComment<cr>
-
 "map Q to something useful
 noremap Q gq
 
@@ -201,17 +192,6 @@ nmap <F1> <Esc>
 "Numbers
 set number
 set numberwidth=5
-
-" -------------------
-" AUTO & OTHERS
-" -------------------
-" Disable netrw's autocmd, since we're ALWAYS using NERDTree
-"runtime plugin/netRwPlugin.vim
-"augroup FileExplorer
-  "au!
-"augroup END
-
-"let g:NERDTreeHijackNetrw = 0
 
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -265,8 +245,9 @@ set guioptions-=r
 
 " Project Tree
 autocmd VimEnter *
-  \ if &filetype == "ruby" |
+  \ if &filetype == "ruby" || &filetype == "netrw" |
   \   NERDTree |
   \   wincmd p |
   \ endif
 
+let g:NERDTreeHijackNetrw = 0
