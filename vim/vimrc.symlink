@@ -210,6 +210,8 @@ endif
 " -------------------
 command! Rroutes :e config/routes.rb
 command! Rschema :e db/schema.rb
+command! Rseeds :e db/seeds.rb
+command! Rgemfile :e Gemfile
 
 " Make shift-tab work
 exe 'set t_kB=' . nr2char(27) . '[Z'
@@ -255,7 +257,7 @@ let g:NERDTreeHijackNetrw = 0
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
-set winminheight=0
+"set winminheight=0
 
 map - 5<C-W>-
 map + 5<C-W>+
