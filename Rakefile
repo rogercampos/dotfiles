@@ -1,12 +1,13 @@
 require 'fileutils'
 
 desc "Install everything into the system"
-task :install => [:symlinks, :executables]
+task :install => [:setup, :symlinks, :executables]
 
 
 desc "Setup environment"
 task :setup do
   `mkdir -p ~/.vim-tmp`
+  `mkdir -p ~/opt/bin`
 end
 
 desc "Only symlink files"
@@ -43,12 +44,13 @@ task :symlinks do
 end
 
 
-desc "Execute executable files"
+desc "Symlink binaries from /bin into the user's ~/opt/bin"
 task :executables do
-  runables = Dir.glob('*/**{.rb}')
+  runables = Dir.glob('bin/*')
 
   runables.each do |runable|
-    load runable
+    instr = "ln -s \"$PWD/#{runable}\" \"$HOME/opt/#{runable}\""
+    `#{instr}`
   end
 end
 
