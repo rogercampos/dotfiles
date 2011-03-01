@@ -10,3 +10,4 @@ alias gb='git branch'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias ga="git add"
+alias glog="git log --decorate --graph"
