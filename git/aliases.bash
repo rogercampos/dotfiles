@@ -3,7 +3,7 @@ alias glc="git log --graph --color --date=relative --stat"
 alias gph='git push'
 alias gpl='git pull'
 alias gd='git diff'
-alias gc='git commit'
+alias gc='git commit -v'
 alias gca='git commit -a'
 alias gco='git checkout'
 alias gb='git branch'
