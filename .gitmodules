@@ -13,9 +13,6 @@
 [submodule "vim/vim.symlink/bundle/nerd-tree"]
 	path = vim/vim.symlink/bundle/nerd-tree
 	url = git://github.com/vim-scripts/The-NERD-tree.git
-[submodule "vim/vim.symlink/bundle/rainbow-parenthesis"]
-	path = vim/vim.symlink/bundle/rainbow-parenthesis
-	url = git://github.com/vim-scripts/Rainbow-Parenthesis.git
 [submodule "vim/vim.symlink/bundle/snipmate"]
 	path = vim/vim.symlink/bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
