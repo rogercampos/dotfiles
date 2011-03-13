@@ -141,15 +141,6 @@ if !has("gui")
     let g:CSApprox_loaded = 1
 endif
 
-"make <D-intro> jump add new line as in Textmate
-inoremap <D-CR> <ESC>o
-
-"map to NERDtree
-"nnoremap <c-t> :NERDTreeToggle<CR>
-
-"map to bufexplorer
-nnoremap <C-B> :BufExplorer<cr>
-
 "map to fuzzy finder text mate stylez
 nnoremap <c-f> :CommandTFlush<CR>:CommandT<CR>
 
@@ -162,9 +153,6 @@ nnoremap Y y$
 " -------------------
 " KEYBINDS
 " -------------------
-"Move lines up and down
-map <C-J> :m +1 <CR>
-map <C-K> :m -2 <CR>
 
 "Duplicate a selection
 vmap D y'>p
@@ -185,9 +173,9 @@ map L $
 nmap <F1> <Esc>
 
 "Use Ack instead of Grep when available
-"if executable("ack")
-  "set grepprg=ack\ -H\ --nogroup\ --nocolor\ --ignore-dir=tmp\ --ignore-dir=coverage
-"endif
+if executable("ack")
+  set grepprg=ack\ -H\ --nogroup\ --nocolor\ --ignore-dir=tmp\ --ignore-dir=coverage
+endif
 
 "Numbers
 set number
@@ -245,15 +233,6 @@ set cursorline
 set guioptions-=L
 set guioptions-=r
 
-" Project Tree
-autocmd VimEnter *
-  \ if &filetype == "ruby" || &filetype == "netrw" |
-  \   NERDTree |
-  \   wincmd p |
-  \ endif
-
-let g:NERDTreeHijackNetrw = 0
-
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
@@ -266,3 +245,64 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
+
+
+set encoding=utf-8
+set ttyfast
+set ruler
+
+nnoremap <leader>a :Ack
+
+" Splits  ,v to open a new vertical split and switch to it
+nnoremap <leader>v <C-w>v<C-w>l
+
+" Saving and buffer stuff
+" :wqa! Quit saving
+nmap <leader>q :wqa!<CR>
+nmap <leader>w :w!<CR>
+nmap <leader><Esc> :q!<CR>
+
+" NERDTree
+let g:NERDChristmasTree = 1
+let g:NERDTreeWinPos = "left"
+let g:NERDTreeQuitOnOpen = 1
+map <leader>p :NERDTreeToggle<cr>
+
+autocmd VimEnter *
+  \ if &filetype == "ruby" || &filetype == "netrw" |
+  \   NERDTree |
+  \   wincmd p |
+  \ endif
+
+let g:NERDTreeHijackNetrw = 0
+
+" AutoClose
+let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}
+let g:AutoCloseProtectedRegions = ["Character"]
+
+let my_home = expand("$HOME/")
+
+" Finally, load custom configs
+if filereadable(my_home . '.vimrc.local')
+  source ~/.vimrc.local
+endif
+
+" BLAAAME
+vmap <Leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p<CR>
+
+" Tabularize
+if exists(":Tab")
+  nmap <leader>a\| :Tab /\|<CR>
+  vmap <leader>a\| :Tab /\|<CR>
+  nmap <leader>a= :Tab /=<CR>
+  vmap <leader>a= :Tab /=<CR>
+  nmap <leader>a: :Tab /:\zs<CR>
+  vmap <leader>a: :Tab /:\zs<CR>
+endif
+
+
+" css colors
+let g:cssColorVimDoNotMessMyUpdatetime = 1
+
+" Press F5 to toggle GUndo tree
+nnoremap <F5> :GundoToggle<CR>
