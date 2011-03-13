@@ -4,9 +4,6 @@
 [submodule "vim/vim.symlink/bundle/command-t"]
 	path = vim/vim.symlink/bundle/command-t
 	url = git://github.com/wincent/Command-T.git
-[submodule "vim/vim.symlink/bundle/delimit-mate"]
-	path = vim/vim.symlink/bundle/delimit-mate
-	url = git://github.com/Raimondi/delimitMate.git
 [submodule "vim/vim.symlink/bundle/nerd-tree"]
 	path = vim/vim.symlink/bundle/nerd-tree
 	url = git://github.com/vim-scripts/The-NERD-tree.git
