@@ -55,9 +55,6 @@
 [submodule "vim/vim.symlink/bundle/vim-markdown"]
 	path = vim/vim.symlink/bundle/vim-markdown
 	url = git://github.com/hallison/vim-markdown.git
-[submodule "vim/vim.symlink/bundle/vim-markdown-preview"]
-	path = vim/vim.symlink/bundle/vim-markdown-preview
-	url = git://github.com/robgleeson/vim-markdown-preview.git
 [submodule "vim/vim.symlink/bundle/gundo.vim"]
 	path = vim/vim.symlink/bundle/gundo.vim
 	url = git://github.com/sjl/gundo.vim.git
