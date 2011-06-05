@@ -6,7 +6,6 @@ task :install => [:setup, :symlinks, :executables]
 
 desc "Setup environment"
 task :setup do
-  `mkdir -p ~/.vim-tmp`
   `mkdir -p ~/opt/bin`
 end
 
