@@ -5,6 +5,10 @@
 
 export BASHDIR=~/dotfiles
 
+if [ -f ~/.pre-localrc ]; then
+  . ~/.pre-localrc
+fi
+
 for file in `ls $BASHDIR/**/*.bash` ; do
   . $file
 done
