@@ -17,10 +17,9 @@
         branch = auto
         ui = auto
 [core]
-        excludesfile = ~/.gitignore
         editor = vim
 [apply]
         whitespace = nowarn
 [diff]
-  tool = meld
+        tool = meld
 
