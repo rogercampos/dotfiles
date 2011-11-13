@@ -11,3 +11,13 @@ alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias ga="git add"
 alias glog="git log --decorate --graph"
+
+gbdel () {
+  if [ -z "$1" ]; then
+    echo "Which branch do you want to remove?"
+    return 1
+  fi
+
+  git branch -d $1
+  git push origin :$1
+}
