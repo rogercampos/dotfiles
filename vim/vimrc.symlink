@@ -181,6 +181,7 @@ endif
 set number
 set numberwidth=5
 
+" Remove whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
 
 " New filetypes
