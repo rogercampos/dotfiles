@@ -1,33 +1,21 @@
 Installation
 
-    git clone git://github.com/nelstrom/dotfiles.git
+    git clone git://github.com/rogercampos/dotfiles.git
 
-Where possible, Vim plugins are installed as git submodules. Check these out by
-running the commands:
+All vim plugins are installed via submodules and using pathogen to manage
+them.
 
     cd dotfiles
     git submodule init
     git submodule update
 
-Create symlinks:
+Run a install task to setup the thing, take a look at Rakefile file for more
+info:
 
-    ln -s ~/dotfiles/bashrc ~/.bashrc
-    ln -s ~/dotfiles/vimrc ~/.vimrc
-    ln -s ~/dotfiles/gvimrc ~/.gvimrc
-    ln -s ~/dotfiles/irbrc ~/.irbrc
-    ln -s ~/dotfiles/vim ~/.vim
-
-I put Vim's backup and swap files in `~/tmp`, so that directory must exist. To
-be sure, run: 
-
-    mkdir ~/tmp
+    rake install
 
 VIM
 ===
-
-My preferences for Vim are stored in `dotfiles/vimrc` and `dotfiles/gvimrc`
-respectively. All plugins and scripts are stored in the `dotfiles/vim`
-directory.
 
 Adding Plugin Bundles
 ---------------------
@@ -43,7 +31,7 @@ This will update the `.gitmodules` file by appending something like:
     [submodule "vim/bundle/vim-javascript"]
         path = vim/bundle/vim-javascript
         url = http://github.com/pangloss/vim-javascript.git
-    
+
 As well as checkout out the git repo into the
 `vim/bundle/vim-javascript` directory. You can then commit these changes
 as follows:
@@ -51,18 +39,20 @@ as follows:
     git add .
     git ci -m "Added the javascript bundle"
 
-### Command-t
 
-The command-t extension require Vim with ruby support, and furthermore, the
-ruby code depends on a C extension for extra speed. The usual pathogen
-installation proceedure didn't work for me, but I followed these steps to make
-it work:
+Removing a bundle
+-----------------
 
-    cd ~/dotfiles/vim/bundle/command-t/ruby/command-t
-    ruby extconf.rb
-    make
+Simply follow this [ Stackoverflow answer ](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule)
+I paste the steps here:
 
-That did the trick.
+1. Delete the relevant line from the .gitmodules file.
+2. Delete the relevant section from .git/config.
+3. Run `git rm --cached path_to_submodule` (no trailing slash).
+4. Commit and delete the now untracked submodule files. You'll only need to
+   commit the change to .gitmodules file.
+
+
 
 RUBY
 ====
@@ -72,7 +62,6 @@ the most from these, you should install the [interactive_editor][i_editor] and
 [awesome_print][ap] gems, by running:
 
     gem install interactive_editor awesome_print
-
 
 
 
