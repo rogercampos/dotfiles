@@ -21,3 +21,13 @@ gbdel () {
   git branch -d $1
   git push origin :$1
 }
+
+gbnew () {
+  if [ -z "$1" ]; then
+    echo "Which branch do you want to create?"
+    return 1
+  fi
+
+  git checkout -b $1
+  git push -u origin $1
+}
