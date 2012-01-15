@@ -21,23 +21,30 @@ Adding Plugin Bundles
 ---------------------
 
 Plugins that are published on github can be installed as submodules. For
-example, to install the [JavaScript bundle][jsbun], follow these steps:
+example, to install the [Ctrlp.vim plugin](http://kien.github.com/ctrlp.vim), follow these steps:
 
     cd ~/dotfiles
-    git submodule add http://github.com/pangloss/vim-javascript.git vim/bundle/vim-javascript
+    git submodule add https://github.com/kien/ctrlp.vim.git vim/vim.symlink/bundle/ctrlp.vim
+
 
 This will update the `.gitmodules` file by appending something like:
 
-    [submodule "vim/bundle/vim-javascript"]
-        path = vim/bundle/vim-javascript
-        url = http://github.com/pangloss/vim-javascript.git
+    [submodule "vim/vim.symlink/bundle/ctrlp.vim"]
+        path = vim/vim.symlink/bundle/ctrlp.vim
+        url = https://github.com/kien/ctrlp.vim.git
 
-As well as checkout out the git repo into the
-`vim/bundle/vim-javascript` directory. You can then commit these changes
-as follows:
+You'll also notice that Git has automatically added the new submodule to be
+commited:
 
-    git add .
-    git ci -m "Added the javascript bundle"
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    # modified:   .gitmodules
+    # new file:   vim/vim.symlink/bundle/ctrlp.vim
+
+You can simply do the commit now:
+
+    git commit -m "Adding ctrlp plugin"
 
 
 Removing a bundle
@@ -50,7 +57,8 @@ I paste the steps here:
 2. Delete the relevant section from .git/config.
 3. Run `git rm --cached path_to_submodule` (no trailing slash).
 4. Commit and delete the now untracked submodule files. You'll only need to
-   commit the change to .gitmodules file.
+   commit the change to .gitmodules file, when you do so git automatically
+   adds the deleted submodule to the stage stuff to be commited.
 
 
 
