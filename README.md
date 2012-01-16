@@ -50,7 +50,7 @@ You can simply do the commit now:
 Removing a bundle
 -----------------
 
-Simply follow this [ Stackoverflow answer ](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule)
+Simply follow this [Stackoverflow answer](http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule).
 I paste the steps here:
 
 1. Delete the relevant line from the .gitmodules file.
