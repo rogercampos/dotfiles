@@ -181,7 +181,7 @@ endif
 set number
 set numberwidth=5
 
-" Remove whitespaces
+" Remove whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
 " New filetypes
@@ -208,7 +208,7 @@ exe 'set t_kB=' . nr2char(27) . '[Z'
 
 " GRB: Put useful info in status line
 let g:rails_statusline = 0
-set statusline=%f%m%r%h\ [%L]\ [%{&ff}]\ %{fugitive#statusline()}\ %{rvm#statusline()}\ %y%=[%p%%]\ [line:%03l,col:%02v]
+set statusline=%f%m%r%h\ [%L]\ [%{&ff}]\ %y%=[%p%%]\ [line:%03l,col:%02v]
 hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
 
 " GRB: clear the search buffer when hitting return
