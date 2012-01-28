@@ -99,7 +99,3 @@ fi
 # bigger history
 export HISTFILESIZE=20000
 export HISTSIZE=10000
-
-[[ -s '/usr/local/lib/rvm' ]] && source '/usr/local/lib/rvm'
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
