@@ -46,6 +46,13 @@ You can simply do the commit now:
 
     git commit -m "Adding ctrlp plugin"
 
+Later, if you want to pull these changes from another computer you'll have to
+do:
+
+    git pull
+    git submodule init
+    git submodule update
+
 
 Removing a bundle
 -----------------
