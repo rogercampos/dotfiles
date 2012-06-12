@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+
+gem 'activesupport'
+
+require 'colored'
+require 'thor'
+require 'git'
+require 'active_support/all'
+require 'action_view'
+
+module Git
+  class Lib
+    def remote_prune(name)
+      command("remote prune", [name])
+    end
+  end
+
+  class Remote < Path
+    def prune
+      @base.lib.remote_prune(@name)
+    end
+  end
+end
+
+class GitCommand < Thor
+  default_task :default
+
+  method_options :merged => false
+  method_options :unmerged => false
+  method_options :local => false
+  method_options :remote => false
+  method_options :oneline => false
+
+  desc "default", "Shows merge status between branches"
+
+  def default
+    puts ["Current branch:", repository.current_branch].join(" ")
+
+    repository.remotes.each do |remote|
+      puts ["Fetching remote '#{remote.name}'", "(#{remote.url})".black].join(" ")
+      remote.fetch
+      puts "Deleting stale remote-tracking branches under '#{remote.name}'"
+      remote.prune
+    end
+
+    puts ""
+
+    branches.each do |branch|
+      begin
+        ahead = repository.log.between(repository.current_branch, branch)
+        behind = repository.log.between(branch, repository.current_branch)
+
+        pbranch(branch, ahead, behind) do
+          limit = 4
+          ahead.take(limit).each do |commit|
+            puts "  * #{commit.message.lines.first.strip} " + "(#{commit.author.name}, #{time_ago_in_words(commit.date)})".black
+          end
+          if ahead.size > limit
+            puts "  * ..."
+          end
+        end
+      rescue => e
+        puts "ERROR: Unknown branch '#{branch.name}'".red
+      end
+    end
+  end
+
+  no_tasks do
+    include ActionView::Helpers::DateHelper
+    extend ActiveSupport::Memoizable
+
+    def repository
+      Git.open(Dir.pwd)
+    end
+
+    def branches
+      case
+        when options[:local]
+          repository.branches.local
+        when options[:remote]
+          repository.branches.remote
+        else
+          repository.branches
+      end.reject { |b| b.name == repository.current_branch }
+    end
+
+    memoize :repository, :branches
+
+    def pbranch(branch, ahead, behind, &block)
+      color = ahead.any? ? :red : :green
+      if (ahead.none? or (ahead.any? and not options[:merged])) and not (ahead.none? and options[:unmerged])
+        puts "#{branch}".send(color) + " #{ahead.size} commits ahead, #{behind.size} commits behind".black
+        yield if block_given? and not options[:oneline]
+      end
+    end
+  end
+end
+
+GitCommand.start
