@@ -172,11 +172,6 @@ map L $
 "No Help, please
 nmap <F1> <Esc>
 
-"Use Ack instead of Grep when available
-if executable("ack")
-  set grepprg=ack\ -H\ --nogroup\ --nocolor\ --ignore-dir=tmp\ --ignore-dir=coverage
-endif
-
 "Numbers
 set number
 set numberwidth=5
@@ -253,6 +248,7 @@ set ttyfast
 set ruler
 
 nnoremap <leader>a :Ack
+let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 " Splits  ,v to open a new vertical split and switch to it
 nnoremap <leader>v <C-w>v<C-w>l
