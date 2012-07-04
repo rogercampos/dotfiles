@@ -36,6 +36,7 @@ set ruler                  " show the cursor position all the time
 set wildmenu               " turn on wild menu
 set wildmode=longest,list
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip  " MacOSX/Linux
 set ch=2                   " command line height
 " set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
 set report=0               " tell us about changes
@@ -302,3 +303,6 @@ let g:cssColorVimDoNotMessMyUpdatetime = 1
 nnoremap <F5> :GundoToggle<CR>
 
 set tags+=gems.tags
+
+" Ctrlp wild ignore
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|\tmp$\|\log$'
