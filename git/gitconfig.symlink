@@ -23,3 +23,8 @@
 [diff]
         tool = meld
 
+[merge]
+        ff = false
+
+[rerere]
+        enable = true

@@ -305,4 +305,5 @@ nnoremap <F5> :GundoToggle<CR>
 set tags+=gems.tags
 
 " Ctrlp wild ignore
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|\tmp$\|\log$'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|tmp$\|log$\|coverage$\|public$\|db/migrate$\|log$\|script$\|vendor$'
+
