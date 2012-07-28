@@ -46,3 +46,6 @@
 [submodule "vim/vim.symlink/bundle/vim-coffee-script.vim"]
 	path = vim/vim.symlink/bundle/vim-coffee-script.vim
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "vim/vim.symlink/bundle/vim-ruby"]
+	path = vim/vim.symlink/bundle/vim-ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
