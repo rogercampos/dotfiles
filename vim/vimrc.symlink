@@ -17,12 +17,6 @@ set backspace=indent,eol,start
 "store lots of :cmdline history
 set history=10000
 
-if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-    colorscheme railscasts
-else
-    colorscheme default
-endif
 
 set nobackup
 set noswapfile
@@ -296,9 +290,6 @@ if exists(":Tab")
 endif
 
 
-" css colors
-let g:cssColorVimDoNotMessMyUpdatetime = 1
-
 " Press F5 to toggle GUndo tree
 nnoremap <F5> :GundoToggle<CR>
 
@@ -307,3 +298,12 @@ set tags+=gems.tags
 " Ctrlp wild ignore
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|tmp$\|log$\|coverage$\|public$\|db/migrate$\|log$\|script$\|vendor$'
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=256 " 256 colors
+set background=dark
+color grb256
+
+set fo-=t
