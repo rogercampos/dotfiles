@@ -18,7 +18,8 @@ gbdel () {
     return 1
   fi
 
-  git branch -d $1
+  git branch -D $1
+  git branch -rd origin/$1
   git push origin :$1
 }
 
